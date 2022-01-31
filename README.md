@@ -5,7 +5,7 @@
 ![](./assets/WRRC.jpg)
 
 ## Overview
-In This week we will create the backend of our new web application, for now we just learned how to get the data from a json file and call it using an end point "/".
+In This week we will create the backend of our new web application, for now we just learned how to get the data from a json file and call it using an end point "/", we also learned how to use and open API.
 
 ## Getting Started
 1. creat a new repository and clone it to your machine
@@ -21,3 +21,10 @@ In This week we will create the backend of our new web application, for now we j
 ## Project Features
 - "/" gives you the formatted data
 - "/favorite" gives you a "welcome to favorite" message
+- use "/trending" to find an array of trending movies
+- use "/search?name=''" to search for a movie by name
+-use "/tv" to get an array of most popular tv series
+-use "/tv/top_rated" to get an array of top rated tv series
+-use "genre" to find a list of genres
+-added error handling for missing endpoints (404)
+added error handling for server errors (500)
