@@ -51,6 +51,12 @@ app.post('/addMovie', addMovieHandler);
 
 app.get('/getMovies', getMoviesHandler);
 
+app.get('/getMovie/:id', getMovieHandler);
+
+app.put('/UPDATE/:id', updateHandler);
+
+app.delete('/DELETE/:id', deleteHandler);
+
 app.use("*", noEndPointHandler);
 
 function helloWorldHandler(req, res) {
@@ -157,6 +163,42 @@ function getMoviesHandler(req, res) {
     })
 
 }
+
+function getMovieHandler(req,res){
+    const id=req.params.id;
+    console.log(req);
+    const sql = `SELECT * FROM favMovies WHERE id=${id}`
+
+    client.query(sql).then(data=>{
+      return res.status(200).json(data.rows[0]);
+    }).catch(error => {
+        errorHandler(error, req, res);
+    })
+}
+
+function updateHandler(req,res){
+    const id = req.params.id;
+    const reqBody=req.body;
+    const sql= `UPDATE favMovies SET title=$1, release_date=$2, poster_path=$3, overview=$4, comment=$5 WHERE id=${id} RETURNING *;`;
+    let values= [reqBody.title, reqBody.release_date, reqBody.poster_path, reqBody.overview, reqBody.comment];
+    
+    client.query(sql,values).then(data=> {
+       return res.status(200).json(data.rows[0]);
+    }).catch(error => {
+        errorHandler(error, req, res);
+    })
+}
+
+function deleteHandler(req,res){
+    const id = req.params.id;
+    const sql = `DELETE FROM favMovies WHERE id=${id};`;
+    client.query(sql).then(()=>{
+        return res.status(204).send([]);
+    }).catch(error => {
+        errorHandler(error, req, res);
+    })
+}
+
 
 function noEndPointHandler(req, res) {
     return res.status(404).send("no end point with that name found");

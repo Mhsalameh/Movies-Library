@@ -7,6 +7,7 @@
 ## Overview
 In This week we will create the backend of our new web application, for now we just learned how to get the data from a json file and call it using an end point "/", we also learned how to use and open API.
 Added some database to our code, we now can add movie's data and retrieve the movies that we added.
+We can also use put and delete do update our database for a specific entry.
 
 ## Getting Started
 1. creat a new repository and clone it to your machine
@@ -31,5 +32,8 @@ Added some database to our code, we now can add movie's data and retrieve the mo
 - use "/genre" to find a list of genres
 - use "/addMovie" to add favorite movies with the following properties to the data base (title, release_date,poster_path, overview, comment).
 - use "/getMovies" to retrieve the data from your favorite movies data.
+- use "/getMovie/*id* to get a specific entry in the database.
+- use "/UPDATE/*id* and type in the body the update vesion
+- use "/DELETE/*id* to delete a specific row in the database.
 - added error handling for missing endpoints (404).
 - added error handling for server errors (500).
