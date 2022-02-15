@@ -79,7 +79,8 @@ function favoriteHandler(req, res) {
 
 function trendingHandler(req, res) {
     let movies = [];
-    axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=${APIKEY}`).then(value => {
+     let pagReq = req.query.page;
+    axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=${APIKEY}?page=${pagReq}`).then(value => {
         value.data.results.forEach(element => {
             let oneMovie = new Movie(element.id, element.title, element.release_date, element.poster_path, element.overview)
             movies.push(oneMovie);
