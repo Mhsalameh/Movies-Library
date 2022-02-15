@@ -84,7 +84,7 @@ function trendingHandler(req, res) {
             let oneMovie = new Movie(element.id, element.title, element.release_date, element.poster_path, element.overview)
             movies.push(oneMovie);
         });
-        return res.status(200).send(movies);
+        return res.status(200).json(movies);
     }).catch(error => {
         errorHandler(error, req, res);
     })
