@@ -1,5 +1,4 @@
 `use strict`;
-import cors from 'cors';
 
 const express = require(`express`);
 
@@ -8,7 +7,6 @@ const axios = require('axios');
 const pg = require('pg');
 
 const dotEnv = require('dotenv');
-
 
 dotEnv.config();
 
@@ -174,7 +172,7 @@ function getMoviesHandler(req, res) {
 function getMovieHandler(req,res){
     const id=req.params.id;
     console.log(req);
-    const sql = `SELECT * FROM favMovies WHERE id=${id};`
+    const sql = `SELECT * FROM favMovies WHERE id=${id}`
 
     client.query(sql).then(data=>{
       return res.status(200).json(data.rows[0]);
