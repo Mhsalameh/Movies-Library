@@ -8,6 +8,10 @@ const pg = require('pg');
 
 const dotEnv = require('dotenv');
 
+const cors = require('cors');
+
+
+
 dotEnv.config();
 
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -27,6 +31,8 @@ const { port } = require('pg/lib/defaults');
 const app = express();
 
 app.use(express.json());
+
+app.use(cors())
 
 function Movie(id, title, release_date, posterPath, overview) {
     this.id = id;
