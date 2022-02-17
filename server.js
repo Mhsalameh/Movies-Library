@@ -7,7 +7,10 @@ const axios = require('axios');
 const pg = require('pg');
 
 const dotEnv = require('dotenv');
+
 const cors = require('cors');
+
+
 
 dotEnv.config();
 
@@ -87,7 +90,7 @@ function trendingHandler(req, res) {
             let oneMovie = new Movie(element.id, element.title, element.release_date, element.poster_path, element.overview)
             movies.push(oneMovie);
         });
-        return res.status(200).send(movies);
+        return res.status(200).json(movies);
     }).catch(error => {
         errorHandler(error, req, res);
     })
@@ -179,7 +182,7 @@ function getMoviesHandler(req, res) {
 function getMovieHandler(req,res){
     const id=req.params.id;
     console.log(req);
-    const sql = `SELECT * FROM favMovies WHERE id=${id};`
+    const sql = `SELECT * FROM favMovies WHERE id=${id}`
 
     client.query(sql).then(data=>{
       return res.status(200).json(data.rows[0]);
