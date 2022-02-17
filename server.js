@@ -156,6 +156,10 @@ function addMovieHandler(req, res) {
     let reqBody = req.body;
     let sql = `INSERT INTO favmovies(title, release_date, poster_path, overview, comment) VALUES($1, $2, $3, $4, $5) RETURNING *;`;
     let values = [reqBody.title, reqBody.release_date, reqBody.poster_path, reqBody.overview, reqBody.comment];
+    if (reqBody.title===null){
+        values = [reqBody.original_name, reqBody.first_air_date, reqBody.poster_path, reqBody.overview, reqBody.comment];
+
+    }
 
     client.query(sql, values).then((data) => {
         return res.status(201).json(data.rows[0]);
