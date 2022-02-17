@@ -85,7 +85,7 @@ function favoriteHandler(req, res) {
 
 function trendingHandler(req, res) {
     let movies = [];
-    axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=${APIKEY}`).then(value => {
+    axios.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=${APIKEY}`).then(value => {
         value.data.results.forEach(element => {
             let oneMovie = new Movie(element.id, element.title, element.release_date, element.poster_path, element.overview)
             movies.push(oneMovie);
@@ -156,11 +156,6 @@ function addMovieHandler(req, res) {
     let reqBody = req.body;
     let sql = `INSERT INTO favmovies(title, release_date, poster_path, overview, comment) VALUES($1, $2, $3, $4, $5) RETURNING *;`;
     let values = [reqBody.title, reqBody.release_date, reqBody.poster_path, reqBody.overview, reqBody.comment];
-    if (reqBody.title===null){
-        values = [reqBody.original_name, reqBody.first_air_date, reqBody.poster_path, reqBody.overview, reqBody.comment];
-
-    }
-
     client.query(sql, values).then((data) => {
         return res.status(201).json(data.rows[0]);
     }).catch(error => {
