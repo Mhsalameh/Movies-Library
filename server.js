@@ -14,19 +14,18 @@ const cors = require('cors');
 
 dotEnv.config();
 
-const DATABASE_URL = process.env.DATABASE_URL;
-// const client = new pg.Client(DATABASE_URL);
-
 const client = new pg.Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false }
-});
+    user: process.env.POSTGRES_USER,
+    host: 'db',
+    database: 'postgres',
+    password: process.env.POSTGRES_PASSWORD,
+    port: 5432,
+  })
 
 const PORT = process.env.PORT;
 const APIKEY = process.env.APIKEY;
 
 const movieData = require('./Movie Data/data.json');
-const { port } = require('pg/lib/defaults');
 
 const app = express();
 
