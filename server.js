@@ -20,7 +20,7 @@ const client = new pg.Client({
     database: 'postgres',
     password: process.env.POSTGRES_PASSWORD,
     port: 5432,
-});
+  })
 
 const PORT = process.env.PORT;
 const APIKEY = process.env.APIKEY;
@@ -32,7 +32,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors())
-console.log(process.env.PORT)
+
 function Movie(id, title, release_date, posterPath, overview) {
     this.id = id;
     this.title = title;

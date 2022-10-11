@@ -1,19 +1,5 @@
 version: '3.8'
 services:
-
-  db:
-    image: postgres
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-
-    volumes:
-      - dbdata:/var/lib/postgresql/data
-    networks:
-      - movies_app_db
-    ports:
-      - 5432:5432
   webapp:
     build: .
     hostname: nodejsserver
@@ -28,7 +14,19 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - PORT=3000
-      - APIKEY=b868c10b8e5bf320df49679b72fbd34f
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    networks:
+      - movies_app_db
+    ports:
+      - 5432:5432
   nginx:
     image: nginx:latest
     ports:
